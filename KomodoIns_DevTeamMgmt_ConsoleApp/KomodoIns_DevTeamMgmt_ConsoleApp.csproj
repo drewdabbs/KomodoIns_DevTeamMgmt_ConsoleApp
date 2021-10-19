@@ -43,16 +43,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DeveloperClass.cs" />
-    <Compile Include="HumanResourcesClass.cs" />
-    <Compile Include="IEmployee.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgramUI.cs" />
-    <Compile Include="ProjectManagerClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Developer_ClassList\Developer_ClassList.csproj">
+      <Project>{73ad7a74-6f56-4061-bf9f-8d03ccf69dc4}</Project>
+      <Name>Developer_ClassList</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Developer_Repository\Developer_Repository.csproj">
+      <Project>{1344ac36-efda-42cd-a850-ff85b2346df0}</Project>
+      <Name>Developer_Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

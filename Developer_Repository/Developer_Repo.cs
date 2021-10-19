@@ -1,4 +1,4 @@
-﻿using KomodoIns_DevTeamMgmt_ConsoleApp;
+﻿using Developer_ClassList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,24 +9,31 @@ namespace Developer_Repository
 {
     public class Developer_Repo
     {
-        public List<Developer> _devList = new List<Developer>();
+        private readonly List<Developer> _devDirectory = new List<Developer>();
 
         // Create a new developer
         public bool AddDeveloperToRepo(Developer developer)
         {
-            int startingCount = _devList.Count;
-            _devList.Add(developer);
-            bool wasAdded = _devList.Count > startingCount ? true : false;
+            int startingCount = _devDirectory.Count;
+            _devDirectory.Add(developer);
+            bool wasAdded = _devDirectory.Count > startingCount ? true : false;
             return wasAdded;
         }
         // Read or access the database
         public List<Developer> ReadListOfDevs()
         {
-            return _devList;
+            return _devDirectory;
         }
         // Update an existing developer
 
 
         // Remove an employee/developer
+
+        // Find Developer by ID
+        public Developer FindDeveloperEmpID(int employeeID)
+        {
+            foreach (Developer developer in _devDirectory)
+                if (developer == )
+        }
     }
 }

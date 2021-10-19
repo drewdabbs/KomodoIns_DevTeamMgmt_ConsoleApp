@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KomodoIns_DevTeamMgmt_ConsoleApp
+namespace Developer_ClassList
 {
     public interface IEmployee
     {
