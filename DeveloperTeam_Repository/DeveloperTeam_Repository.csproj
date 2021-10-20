@@ -43,6 +43,11 @@
   <ItemGroup>
     <Compile Include="DeveloperTeam_Repo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TeamFive.cs" />
+    <Compile Include="TeamFour.cs" />
+    <Compile Include="TeamOne.cs" />
+    <Compile Include="TeamThree.cs" />
+    <Compile Include="TeamTwo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

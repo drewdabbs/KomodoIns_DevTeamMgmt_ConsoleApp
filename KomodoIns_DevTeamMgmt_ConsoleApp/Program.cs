@@ -12,7 +12,7 @@ namespace KomodoIns_DevTeamMgmt_ConsoleApp
         {
             ProgramUI ui = new ProgramUI();
             ui.Run();
-            Console.ReadKey();
+            //Console.ReadKey();
         }
     }
 }

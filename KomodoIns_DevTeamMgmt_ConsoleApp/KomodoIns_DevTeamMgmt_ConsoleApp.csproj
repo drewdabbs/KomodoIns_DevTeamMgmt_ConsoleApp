@@ -51,6 +51,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DeveloperTeam_Repository\DeveloperTeam_Repository.csproj">
+      <Project>{a6bfbb3f-933a-48a6-911b-c7070afffb4b}</Project>
+      <Name>DeveloperTeam_Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Developer_ClassList\Developer_ClassList.csproj">
       <Project>{73ad7a74-6f56-4061-bf9f-8d03ccf69dc4}</Project>
       <Name>Developer_ClassList</Name>
