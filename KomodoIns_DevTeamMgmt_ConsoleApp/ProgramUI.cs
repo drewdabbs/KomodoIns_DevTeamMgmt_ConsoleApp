@@ -15,7 +15,7 @@ namespace KomodoIns_DevTeamMgmt_ConsoleApp
         public void Run()
         {
             Display();
-            SeedDevList();
+            _developerRepo.SeedDevListRepo();
             RunMenu();
 
         }
@@ -23,6 +23,8 @@ namespace KomodoIns_DevTeamMgmt_ConsoleApp
         {
             _developerRepo.DisplayRepo();
         }
+
+        // Main Run Menu
         public void RunMenu()
         {
             bool continueToRun = true;
@@ -47,7 +49,8 @@ namespace KomodoIns_DevTeamMgmt_ConsoleApp
                         _developerRepo.DisplayListOfDevelopers();
                         break;
                     case "3":
-                        // Show a list of only developers that do not have a license
+                        HumanResourcesMenu();
+                        continueToRun = false;
                         break;
                     case "4":
                         continueToRun = false;
@@ -61,6 +64,8 @@ namespace KomodoIns_DevTeamMgmt_ConsoleApp
             }
 
         }
+
+        // Program Manager's Main Menu
         public void ProjectManagerOptions()
         {
             bool runManagerUI = true;
@@ -75,8 +80,8 @@ namespace KomodoIns_DevTeamMgmt_ConsoleApp
                     "5. Find a developer by employee ID #\n\n\n" +
                     "6. Modify Teams including view all teams and its members, view an individual team and its members, and move one developer from a team and assign them to another.\n\n\n" +
                     "7. Exit this application.");
-                string option = Console.ReadLine();
-                switch (option)
+                string optionHR = Console.ReadLine();
+                switch (optionHR)
                 {
                     case "1":
                         _developerRepo.AddNewDeveloper();
@@ -107,7 +112,111 @@ namespace KomodoIns_DevTeamMgmt_ConsoleApp
                 }
             }
         }
-        private void SeedDevList()
+
+        // Human Resources Main Menu
+        public void HumanResourcesMenu()
+        {
+            bool runHRUI = true;
+            while (runHRUI)
+            {
+                Console.Clear();
+                Console.WriteLine("Welcoe to your monthly check on developrs that are in need\n" +
+                    " of a Pluralsight License.\n\n" +
+                    "Below are options to generate the list or exit:\n\n\n" +
+                    "Press 1 to generate a list of developers in need of a license.\n\n" +
+                    "Press 2 to exit.");
+                string optionHR = Console.ReadLine();
+                switch (optionHR)
+                {
+                    case "1":
+                        // Find a developer based on license = true
+                        break;
+                    case "2":
+                        runHRUI = false;
+                        break;
+                    default:
+                        Console.WriteLine("Please enter either the number 1 or number 2.\n" +
+                            "Press any key to continue...");
+                        Console.ReadKey();
+                        break;
+                }
+            }
+        }
+
+        // Team Management UI
+        public void TeamManagementUI()
+        {
+            bool runTeamUI = true;
+            while (runTeamUI)
+            {
+                Console.Clear();
+                Console.WriteLine("Greetings Team Managers.\n" +
+                    "Below are options to generate the list or exit:\n\n\n" +
+                    "Press 1 to show a list of teams with their team name and team ID #.\n\n" +
+                    "Press 2 to exit.");
+                string option = Console.ReadLine();
+                switch (option)
+                {
+                    case "1":
+                        // Find a developer based on license = true
+                        break;
+                    case "2":
+                        runTeamUI = false;
+                        break;
+                    default:
+                        Console.WriteLine("Please enter either the number 1 or number 2.\n" +
+                            "Press any key to continue...");
+                        Console.ReadKey();
+                        break;
+                }
+            }
+        }
+
+        // Team Management Options UI
+        public void TeamManagementOptionsUI()
+        {
+            bool runTeamOptions = true;
+            while (runTeamOptions)
+            {
+                Console.Clear();
+                Console.WriteLine("Greetings Again Team Managers.\n\n\n" +
+                    "Press 1 for Team One" +
+                    "Press 2 for Team Two" +
+                    "Press 3 for Team Three" +
+                    "Press 4 for Team Four" +
+                    "Press 5 for Team Five" +
+                    "Press 6 to exit.");
+                string input = Console.ReadLine();
+                switch (input)
+                {
+                    case "1":
+                        // Team One
+                        break;
+                    case "2":
+                        // Team Two
+                        break;
+                    case "3":
+                        // Team Three
+                        break;
+                    case "4":
+                        // Team Four
+                        break;
+                    case "5":
+                        // Team Five
+                        break;
+                    case "6":
+                        runTeamOptions = false;
+                        break;
+                    default:
+                        Console.WriteLine("Please enter either the number 1 or number 2.\n" +
+                            "Press any key to continue...");
+                        Console.ReadKey();
+                        break;
+                }
+            }
+        }
+            // Seed to field method
+            private void SeedDevList()
         {
             _developerRepo.SeedDevListRepo();
             //Developer dev1 = new Developer(001, "Amanda Knight", true, TeamNumber.Team1);
@@ -163,5 +272,7 @@ namespace KomodoIns_DevTeamMgmt_ConsoleApp
             //_developerRepo.AddDeveloperToRepo(dev24);
             //_developerRepo.AddDeveloperToRepo(dev25);
         }
+
     }
 }
+

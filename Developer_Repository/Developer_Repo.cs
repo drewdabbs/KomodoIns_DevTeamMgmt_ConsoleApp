@@ -10,7 +10,7 @@ namespace Developer_Repository
     public class Developer_Repo
     {
         private readonly List<Developer> _devDirectory = new List<Developer>();
-        
+
         public void DisplayRepo()
         {
             Console.Clear();
@@ -113,7 +113,8 @@ namespace Developer_Repository
             return _devDirectory;
         }
 
-        public void DisplayListOfDevelopers()
+        // Display entire list of devs
+            public void DisplayListOfDevelopers()
         {
             List<Developer> displayDevelopers = ReadListOfDevs();
             foreach (Developer devVariable in displayDevelopers)
@@ -130,10 +131,16 @@ namespace Developer_Repository
                 $"Has Pluralsight License: {devData.PluralsightAccess} | Team #: {devData.TeamNum}");
         }
 
+
         // Update an existing developer
 
 
-        // Remove an employee/developer
+        // Remove a developer
+        public bool DeleteExistingContent(Developer existingContent)  // Revove a developer by ID
+        {
+            bool deleteResult = _devDirectory.Remove(existingContent);
+            return deleteResult;
+        }
 
         // find developer by id
         public void FindDeveloperEmpID()
@@ -144,17 +151,14 @@ namespace Developer_Repository
             string empID = Console.ReadLine();
             int empIDInt = Int32.Parse(empID);
 
-
-
-
-
             foreach (Developer developer in _devDirectory)
             {
                 if (developer.EmployeeID == empIDInt)
                 {
                     Console.WriteLine($"Employee ID #: {developer.EmployeeID}| Employee Name #: {developer.FullName} | " +
-            $"Has Pluralsight License: {developer.PluralsightAccess} | Team #: {developer.TeamNum}");
+$"Has Pluralsight License: {developer.PluralsightAccess} | Team #: {developer.TeamNum}");
                     Console.ReadKey();
+                    break;
                 }
                 else
                 {
@@ -162,6 +166,7 @@ namespace Developer_Repository
                     break;
                 }
             }
+
             Console.ReadKey();
 
 
