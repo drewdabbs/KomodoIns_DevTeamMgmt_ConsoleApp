@@ -43,11 +43,16 @@
   <ItemGroup>
     <Compile Include="DeveloperTeam_Repo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TeamFive.cs" />
-    <Compile Include="TeamFour.cs" />
-    <Compile Include="TeamOne.cs" />
-    <Compile Include="TeamThree.cs" />
-    <Compile Include="TeamTwo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Developer_ClassList\Developer_ClassList.csproj">
+      <Project>{73AD7A74-6F56-4061-BF9F-8D03CCF69DC4}</Project>
+      <Name>Developer_ClassList</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Developer_Repository\Developer_Repository.csproj">
+      <Project>{1344AC36-EFDA-42CD-A850-FF85B2346DF0}</Project>
+      <Name>Developer_Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
