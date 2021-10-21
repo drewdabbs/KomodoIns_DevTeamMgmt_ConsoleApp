@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DeveloperClass.cs" />
+    <Compile Include="DevTeam.cs" />
     <Compile Include="HumanResourcesClass.cs" />
     <Compile Include="IEmployee.cs" />
     <Compile Include="ProjectManagerClass.cs" />
