@@ -25,10 +25,6 @@ namespace DeveloperTeam_Repository
         //
 
 
-        //public void SeedTeamLists() // May not be needed
-        //{
-
-        //}
         private Developer_Repo _devRepo = new Developer_Repo();
         
         // Team One: The Ravens.

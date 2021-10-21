@@ -21,7 +21,14 @@ namespace KomodoIns_DevTeamMgmt_ConsoleApp
         }
         private void Display()
         {
-            _developerRepo.DisplayRepo();
+            Console.Clear();
+            Console.WriteLine("#    #                                       ###                                                         \n" +
+                "#   #   ####  #    #  ####  #####   ####      #  #    #  ####  #    # #####    ##   #    #  ####  ###### \n" +
+                "#  #   #    # ##  ## #    # #    # #    #     #  ##   # #      #    # #    #  #  #  ##   # #    # #      \n" +
+                "###    #    # # ## # #    # #    # #    #     #  # #  #  ####  #    # #    # #    # # #  # #      #####  \n" +
+                "#  #   #    # #    # #    # #    # #    #     #  #  # #      # #    # #####  ###### #  # # #      #      \n" +
+                "#   #  #    # #    # #    # #    # #    #     #  #   ## #    # #    # #   #  #    # #   ## #    # #      \n" +
+                "#    #  ####  #    #  ####  #####   ####     ### #    #  ####   ####  #    # #    # #    #  ####  ###### \n");
         }
 
         // Main Run Menu
@@ -47,7 +54,7 @@ namespace KomodoIns_DevTeamMgmt_ConsoleApp
                         break;
                     case "2":
                         Display();
-                        _developerRepo.DisplayListOfDevelopers();
+                        ReadListOfDevs();
                         break;
                     case "3":
                         HumanResourcesMenu();
@@ -65,6 +72,24 @@ namespace KomodoIns_DevTeamMgmt_ConsoleApp
             }
 
         }
+        public void ReadListOfDevs()
+        {
+            Console.Clear();
+            List<Developer> displayDevList = _developerRepo.ReadListOfDevsRepo();
+            foreach (Developer developer in displayDevList)
+            {
+                DisplayDev(developer);
+                Console.WriteLine("__________________________\n");
+
+            }
+        }
+        public void DisplayDev(Developer developer)
+        {
+            Console.WriteLine($"Employee ID #: {developer.EmployeeID}");
+            Console.WriteLine($"Employee Name #: {developer.FullName} ");
+            Console.WriteLine("Has Pluralsight License: " + (developer.PluralsightAccess));
+        }
+
 
         // Program Manager's Main Menu
         public void ProjectManagerOptions()
@@ -85,16 +110,16 @@ namespace KomodoIns_DevTeamMgmt_ConsoleApp
                 switch (option)
                 {
                     case "1":
-                        _developerRepo.AddNewDeveloper();
+                        AddNewDeveloper();
                         break;
                     case "2":
-                        _developerRepo.UpdateDeveloper();
+                        UpdateDeveloper();
                         break;
                     case "3":
                         _developerRepo.DeleteExistingDeveloper();
                         break;
                     case "4":
-                        _developerRepo.DisplayListOfDevelopers();
+                        //Read
                         break;
                     case "5":
                         _developerRepo.FindDeveloperEmpID();
@@ -113,170 +138,246 @@ namespace KomodoIns_DevTeamMgmt_ConsoleApp
                 }
             }
         }
-
-        // Human Resources Main Menu
-        public void HumanResourcesMenu()
+        public void UpdateDeveloper()
         {
-            bool runHRUI = true;
-            while (runHRUI)
+            Console.Clear();
+            Developer updateDev = new Developer();
+            Console.WriteLine("Below are a few options for updating a developer\n\n" +
+                "Please choose one from the following:\n\n" +
+                "1. Update the developer's name.\n\n" +
+                "2. Update the employee id #.\n\n" +
+                "3. Update as to whether or not the developer has a Pluralsight License.\n\n");
+
+            string update = Console.ReadLine();
+            switch (update)
             {
-                Console.Clear();
-                Console.WriteLine("Welcoe to your monthly check on developrs that are in need\n" +
-                    " of a Pluralsight License.\n\n" +
-                    "Below are options to generate the list or exit:\n\n\n" +
-                    "Press 1 to generate a list of developers in need of a license.\n\n" +
-                    "Press 2 to exit.");
-                string optionHR = Console.ReadLine();
-                switch (optionHR)
+                case "1":
+                    UpdateDevName();
+                    break;
+                case "2":
+                    UpdateEmployeeNumber();
+                    break;
+                case "3":
+                    UpdatePluralsightLicense();
+                    break;
+                default:
+                    Console.WriteLine("Not a valid entry. Please enter in a 1, 2, or a 3.");
+                    break;
+            }
+        }
+        public void UpdateDevName()
+        {
+            List<Developer> developerList = _developerRepo.ReadListOfDevsRepo();
+            Console.Clear();
+            Console.WriteLine("These entries are case sensitive.\n\n");
+            Console.WriteLine("\n\nPlease enter the Developer's employee ID #:\n\n");
+            string empID = Console.ReadLine();
+            int empIDInt = Int32.Parse(empID);
+            Console.WriteLine("\n\nPlease enter the Developer's new full name:\n\n");
+            string updatedName = Console.ReadLine();
+
+            foreach (Developer developer in developerList)
+            {
+                if (developer.EmployeeID == empIDInt)
                 {
-                    case "1":
-                        _developerRepo.ListDevelopersWithoutPluralsightLicense();
-                        break;
-                    case "2":
-                        runHRUI = false;
-                        break;
-                    default:
-                        Console.WriteLine("Please enter either the number 1 or number 2.\n" +
-                            "Press any key to continue...");
-                        Console.ReadKey();
-                        break;
+                    developer.FullName = updatedName;
                 }
             }
         }
 
-        // Team Management UI
-        public void TeamManagementUI()
+        public void UpdateEmployeeNumber()
         {
-            bool runTeamUI = true;
-            while (runTeamUI)
+            List<Developer> developerList = _developerRepo.ReadListOfDevsRepo();
+            Console.Clear();
+            Console.WriteLine("\n\nPlease enter the Developer's employee ID #:\n\n");
+            string empID = Console.ReadLine();
+            int empIDInt = Int32.Parse(empID);
+            Console.WriteLine("\n\nPlease enter the Developer's new employee ID #:\n\n");
+            string updatedNum = Console.ReadLine();
+            int updatedNumInt = Int32.Parse(updatedNum);
+
+            foreach (Developer developer in developerList)
             {
-                Console.Clear();
-                Console.WriteLine("Greetings Team Managers.\n" +
-                    "Below are options to generate the list or exit:\n\n\n" +
-                    "Press 1 to show a list of teams with their team name and team ID #.\n\n" +
-                    "Press 2 to exit.");
-                string option = Console.ReadLine();
-                switch (option)
+                if (developer.EmployeeID == empIDInt)
                 {
-                    case "1":
-                        TeamManagementOptionsUI();
-                        break;
-                    case "2":
-                        runTeamUI = false;
-                        break;
-                    default:
-                        Console.WriteLine("Please enter either the number 1 or number 2.\n" +
-                            "Press any key to continue...");
-                        Console.ReadKey();
-                        break;
+                    developer.EmployeeID = updatedNumInt;
                 }
             }
         }
 
-        // Team Management Options UI
-        public void TeamManagementOptionsUI()
+        public void UpdatePluralsightLicense()
         {
-            bool runTeamOptions = true;
-            while (runTeamOptions)
+            List<Developer> developerList = _developerRepo.ReadListOfDevsRepo();
+            Console.Clear();
+            Console.WriteLine("\n\nPlease enter the Developer's employee ID #:\n\n");
+            string empID = Console.ReadLine();
+            int empIDInt = Int32.Parse(empID);
+
+            foreach (Developer developer in developerList)
             {
-                Console.Clear();
-                Console.WriteLine("Greetings Again Team Managers.\n\n\n" +
-                    "Press 1 for Team One" +
-                    "Press 2 for Team Two" +
-                    "Press 3 for Team Three" +
-                    "Press 4 for Team Four" +
-                    "Press 5 for Team Five" +
-                    "Press 6 to exit.");
-                string input = Console.ReadLine();
-                switch (input)
+                if (developer.EmployeeID == empIDInt)
                 {
-                    case "1":
-                        // Team One
-                        break;
-                    case "2":
-                        // Team Two
-                        break;
-                    case "3":
-                        // Team Three
-                        break;
-                    case "4":
-                        // Team Four
-                        break;
-                    case "5":
-                        // Team Five
-                        break;
-                    case "6":
-                        runTeamOptions = false;
-                        break;
-                    default:
-                        Console.WriteLine("Please enter either the number 1 or number 2.\n" +
-                            "Press any key to continue...");
-                        Console.ReadKey();
-                        break;
+                    Console.WriteLine($"Employee ID #: {developer.EmployeeID}, with the name: {developer.FullName}" + $" has a Pluralsight License status of: {developer.PluralsightAccess} \n\n");
+                    Console.WriteLine("Let us update this developer:\n\n" +
+                        "Type 1 if the developer now has a license.\n\n" +
+                        "Type 2 if the developer now does not have a license.\n\n");
+
+                    string pSL = Console.ReadLine();
+                    switch (pSL)
+                    {
+                        case "1":
+                            developer.PluralsightAccess = true;
+                            break;
+                        case "2":
+                            developer.PluralsightAccess = false;
+                            break;
+                        default:
+                            Console.WriteLine("Option not recognized. Please select 1 if the developer has a Pluralsight license or 2 if they do not.");
+                            break;
+                    }
                 }
             }
         }
-        
-        
-        // Seed to field method
-        //private void SeedDevList()
-        //{
-        //    _developerRepo.SeedDevListRepo();
 
-        //    Developer dev1 = new Developer(001, "Amanda Knight", true, TeamNumber.Team1);
-        //    Developer dev2 = new Developer(002, "Colin Dunn", false, TeamNumber.Team2);
-        //    Developer dev3 = new Developer(003, "Danny Redden", true, TeamNumber.Team3);
-        //    Developer dev4 = new Developer(004, "Dillan Groce", false, TeamNumber.Team4);
-        //    Developer dev5 = new Developer(005, "Andrew Dabbs", true, TeamNumber.Team5);
-        //    Developer dev6 = new Developer(006, "Fabiola Aguilera", false, TeamNumber.Team1);
-        //    Developer dev7 = new Developer(007, "Forrest Ryan", true, TeamNumber.Team2);
-        //    Developer dev8 = new Developer(008, "Garry Banks", false, TeamNumber.Team3);
-        //    Developer dev9 = new Developer(009, "Isiah Elder", true, TeamNumber.Team4);
-        //    Developer dev10 = new Developer(010, "Jade Neff", false, TeamNumber.Team5);
-        //    Developer dev11 = new Developer(011, "Jamar Watkins", true, TeamNumber.Team1);
-        //    Developer dev12 = new Developer(012, "Jeremy Francoeur", false, TeamNumber.Team2);
-        //    Developer dev13 = new Developer(013, "Joshua Middleton", true, TeamNumber.Team3);
-        //    Developer dev14 = new Developer(014, "Keith Ping", false, TeamNumber.Team4);
-        //    Developer dev15 = new Developer(015, "Leslie Counterman", true, TeamNumber.Team5);
-        //    Developer dev16 = new Developer(016, "Mason Mobley", false, TeamNumber.Team1);
-        //    Developer dev17 = new Developer(017, "Nabil Diaf", true, TeamNumber.Team2);
-        //    Developer dev18 = new Developer(018, "Nathan Foreman", false, TeamNumber.Team3);
-        //    Developer dev19 = new Developer(019, "Peter Nikolov", true, TeamNumber.Team4);
-        //    Developer dev20 = new Developer(020, "Rex Meyer", false, TeamNumber.Team5);
-        //    Developer dev21 = new Developer(021, "Samuel Rodriguez", true, TeamNumber.Team1);
-        //    Developer dev22 = new Developer(022, "Savanah Jackson", false, TeamNumber.Team2);
-        //    Developer dev23 = new Developer(023, "LaToya Harvell", true, TeamNumber.Team3);
-        //    Developer dev24 = new Developer(024, "Tristan Auer", false, TeamNumber.Team4);
-        //    Developer dev25 = new Developer(025, "Vanessa Nance", true, TeamNumber.Team5);
+                public void AddNewDeveloper()
+                {
+                    Developer developer = new Developer();
+                    Console.WriteLine("\nPlease enter the developer's full name:");
+                    developer.FullName = Console.ReadLine();
+                    Console.WriteLine("\nPlease enter the new developer's employee ID:");
+                    string empID = Console.ReadLine();
+                    try
+                    {
+                        developer.EmployeeID = Convert.ToInt32(empID);
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Looks like there was an error. Employee ID's are three numerals in order, ranging in vallue from 001 to 999. Please try again");
+                    }
+                    Console.WriteLine("\nDoes this new developer have a Pluralsight license?\n" +
+                        "Enter 1. for yes and 2. for no.");
+                    string pSL = Console.ReadLine();
+                    switch (pSL)
+                    {
+                        case "1":
+                            developer.PluralsightAccess = true;
+                            break;
+                        case "2":
+                            developer.PluralsightAccess = false;
+                            break;
+                        default:
+                            Console.WriteLine("Option not recognized. Please select 1 if the developer has a Pluralsight license or 2 if they do not.");
+                            break;
+                    }
+                    _developerRepo.AddDeveloperToRepo(developer);
+                }
 
 
-        //    _developerRepo.AddDeveloperToRepo(dev1);
-        //    _developerRepo.AddDeveloperToRepo(dev2);
-        //    _developerRepo.AddDeveloperToRepo(dev3);
-        //    _developerRepo.AddDeveloperToRepo(dev4);
-        //    _developerRepo.AddDeveloperToRepo(dev5);
-        //    _developerRepo.AddDeveloperToRepo(dev6);
-        //    _developerRepo.AddDeveloperToRepo(dev7);
-        //    _developerRepo.AddDeveloperToRepo(dev8);
-        //    _developerRepo.AddDeveloperToRepo(dev9);
-        //    _developerRepo.AddDeveloperToRepo(dev10);
-        //    _developerRepo.AddDeveloperToRepo(dev11);
-        //    _developerRepo.AddDeveloperToRepo(dev12);
-        //    _developerRepo.AddDeveloperToRepo(dev13);
-        //    _developerRepo.AddDeveloperToRepo(dev14);
-        //    _developerRepo.AddDeveloperToRepo(dev15);
-        //    _developerRepo.AddDeveloperToRepo(dev16);
-        //    _developerRepo.AddDeveloperToRepo(dev17);
-        //    _developerRepo.AddDeveloperToRepo(dev18);
-        //    _developerRepo.AddDeveloperToRepo(dev19);
-        //    _developerRepo.AddDeveloperToRepo(dev20);
-        //    _developerRepo.AddDeveloperToRepo(dev21);
-        //    _developerRepo.AddDeveloperToRepo(dev22);
-        //    _developerRepo.AddDeveloperToRepo(dev23);
-        //    _developerRepo.AddDeveloperToRepo(dev24);
-        //    _developerRepo.AddDeveloperToRepo(dev25);
-        //}
+                // Human Resources Main Menu
+                public void HumanResourcesMenu()
+                {
+                    bool runHRUI = true;
+                    while (runHRUI)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Welcoe to your monthly check on developrs that are in need\n" +
+                            " of a Pluralsight License.\n\n" +
+                            "Below are options to generate the list or exit:\n\n\n" +
+                            "Press 1 to generate a list of developers in need of a license.\n\n" +
+                            "Press 2 to exit.");
+                        string optionHR = Console.ReadLine();
+                        switch (optionHR)
+                        {
+                            case "1":
+                                _developerRepo.ListDevelopersWithoutPluralsightLicense();
+                                break;
+                            case "2":
+                                runHRUI = false;
+                                break;
+                            default:
+                                Console.WriteLine("Please enter either the number 1 or number 2.\n" +
+                                    "Press any key to continue...");
+                                Console.ReadKey();
+                                break;
+                        }
+                    }
+                }
 
-    }
-}
+                // Team Management UI
+                public void TeamManagementUI()
+                {
+                    bool runTeamUI = true;
+                    while (runTeamUI)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Greetings Team Managers.\n" +
+                            "Below are options to generate the list or exit:\n\n\n" +
+                            "Press 1 to show a list of teams with their team name and team ID #.\n\n" +
+                            "Press 2 to exit.");
+                        string option = Console.ReadLine();
+                        switch (option)
+                        {
+                            case "1":
+                                TeamManagementOptionsUI();
+                                break;
+                            case "2":
+                                runTeamUI = false;
+                                break;
+                            default:
+                                Console.WriteLine("Please enter either the number 1 or number 2.\n" +
+                                    "Press any key to continue...");
+                                Console.ReadKey();
+                                break;
+                        }
+                    }
+                }
+
+                // Team Management Options UI
+                public void TeamManagementOptionsUI()
+                {
+                    bool runTeamOptions = true;
+                    while (runTeamOptions)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Greetings Again Team Managers.\n\n\n" +
+                            "Press 1 for Team One" +
+                            "Press 2 for Team Two" +
+                            "Press 3 for Team Three" +
+                            "Press 4 for Team Four" +
+                            "Press 5 for Team Five" +
+                            "Press 6 to exit.");
+                        string input = Console.ReadLine();
+                        switch (input)
+                        {
+                            case "1":
+                                // Team One
+                                break;
+                            case "2":
+                                // Team Two
+                                break;
+                            case "3":
+                                // Team Three
+                                break;
+                            case "4":
+                                // Team Four
+                                break;
+                            case "5":
+                                // Team Five
+                                break;
+                            case "6":
+                                runTeamOptions = false;
+                                break;
+                            default:
+                                Console.WriteLine("Please enter either the number 1 or number 2.\n" +
+                                    "Press any key to continue...");
+                                Console.ReadKey();
+                                break;
+                        }
+                    }
+                }
+
+
+
+            }
+        }
 
