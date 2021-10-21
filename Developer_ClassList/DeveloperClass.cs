@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Developer_ClassList
 {
-    //public enum TeamNumber { Team1 = 1, Team2, Team3, Team4, Team5, Team6 }
     public class Developer : IEmployee
     {
         public int EmployeeID { get; set; }
