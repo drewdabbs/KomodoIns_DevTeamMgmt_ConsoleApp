@@ -44,7 +44,11 @@ namespace DeveloperTeam_Repository
             AddDeveloperTeamToRepo(team4);
             AddDeveloperTeamToRepo(team5);
         }
-        
+        //See a list of unasigned developers
+        //Choose Employee ID# (by default no developers are assigned to a team)
+        // Add to a team using employee ID# and team#
+        // Remove a dev from a team using employee ID# and team#
+
         // Team One: The Ravens.        
         // Team Two: The Bedouins.
         // Team Three: The Oracles.

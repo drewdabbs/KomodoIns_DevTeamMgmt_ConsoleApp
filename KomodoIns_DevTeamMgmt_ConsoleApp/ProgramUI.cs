@@ -32,7 +32,6 @@ namespace KomodoIns_DevTeamMgmt_ConsoleApp
                 "#   #  #    # #    # #    # #    # #    #     #  #   ## #    # #    # #   #  #    # #   ## #    # #      \n" +
                 "#    #  ####  #    #  ####  #####   ####     ### #    #  ####   ####  #    # #    # #    #  ####  ###### \n");
         }
-
         // Main Run Menu
         public void RunMenu()
         {
@@ -92,8 +91,6 @@ namespace KomodoIns_DevTeamMgmt_ConsoleApp
             Console.WriteLine($"Employee Name #: {developer.FullName} ");
             Console.WriteLine("Has Pluralsight License: " + (developer.PluralsightAccess));
         }
-
-
         // Program Manager's Main Menu
         public void ProjectManagerOptions()
         {
@@ -393,8 +390,8 @@ namespace KomodoIns_DevTeamMgmt_ConsoleApp
             while (runTeamOptions)
             {
                 Console.Clear();
-                Console.WriteLine("Greetings Again Team Managers.\n\n\n" +
-                    "Press 1 for Team One" +
+                Console.WriteLine("\n\nGreetings Again Team Managers.\n\n\n" +
+                    "Press 1 to see a list of developers not asigned ot a team" +
                     "Press 2 for Team Two" +
                     "Press 3 for Team Three" +
                     "Press 4 for Team Four" +
@@ -404,19 +401,19 @@ namespace KomodoIns_DevTeamMgmt_ConsoleApp
                 switch (input)
                 {
                     case "1":
-                        // Team One
+                        // List of unassigned
                         break;
                     case "2":
-                        // Team Two
+                        // add a developer to a team using employee ID# and team#
                         break;
                     case "3":
-                        // Team Three
+                        //See individual developer team status based on employee ID# (by default no developers are assigned to a team)
                         break;
                     case "4":
-                        // Team Four
+                        // remove a dev from a team via employee ID# and Team#
                         break;
                     case "5":
-                        // Team Five
+                        // Create new team
                         break;
                     case "6":
                         runTeamOptions = false;
@@ -429,9 +426,6 @@ namespace KomodoIns_DevTeamMgmt_ConsoleApp
                 }
             }
         }
-
-
-
     }
 }
 
